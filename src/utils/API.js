@@ -1,15 +1,11 @@
 import axios from "axios";
 
-// Export an object containing methods we'll use for accessing the Dog.Ceo API
 
-export default {
-  getRandomDog: function() {
-    return axios.get("https://dog.ceo/api/breeds/image/random");
+// Query the RandomUser API for 200 people from the United States
+const API = {
+  getUsers: function () {
+    return axios.get("https://randomuser.me/api/?nat=US&results=200&nat=us");
   },
-  getDogsOfBreed: function(breed) {
-    return axios.get("https://dog.ceo/api/breed/" + breed + "/images");
-  },
-  getBaseBreedsList: function() {
-    return axios.get("https://dog.ceo/api/breeds/list");
-  }
 };
+
+export default API;
