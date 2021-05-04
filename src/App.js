@@ -1,27 +1,49 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Discover from "./pages/Discover";
-import About from "./pages/About";
-import Search from "./pages/Search";
+import React, { Component } from "react";
+import Card from "./components/Card";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Wrapper from "./components/Wrapper";
+import API from "./utils/API";
 
-function App() {
-  return (
-    <Router>
+class App extends Component {
+  state = {
+    employees: [],
+  };
+
+  // When component loads onto the page we query our user api
+  componentDidMount() {
+    this.getEmployees();
+  }
+
+  getEmployees = async () => {
+    const { data } = await API.getUsers();
+    this.setState({ employees: data.results });
+    // console.log(this.state.employees[0].name.first)
+  };
+
+  render() {
+    return (
       <div>
         <Navbar />
-        <Wrapper>
-          <Route exact path="/" component={About} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/discover" component={Discover} />
-          <Route exact path="/search" component={Search} />
-        </Wrapper>
-        <Footer />
+        
+        <tbody>
+        {this.state.employees.map(
+          ({ picture, name, phone, email, dob, id }) => {
+            return (
+              <Card
+              key={id.value}
+              image={picture.thumbnail}
+              firstName={name.first}
+              lastName={name.last}
+              phone={phone}
+              email={email}
+              date={dob.date.slice(0, -14)}
+              />
+              );
+            }
+            )}
+            </tbody>
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default App;
