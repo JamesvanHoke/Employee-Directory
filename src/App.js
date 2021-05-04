@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Card from "./components/Card";
+import CardWrapper from "./components/CardWrapper";
 import Navbar from "./components/Navbar";
 import API from "./utils/API";
 
@@ -23,24 +23,7 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        
-        <tbody>
-        {this.state.employees.map(
-          ({ picture, name, phone, email, dob, id }) => {
-            return (
-              <Card
-              key={id.value}
-              image={picture.thumbnail}
-              firstName={name.first}
-              lastName={name.last}
-              phone={phone}
-              email={email}
-              date={dob.date.slice(0, -14)}
-              />
-              );
-            }
-            )}
-            </tbody>
+        <CardWrapper employees={this.state.employees} />
       </div>
     );
   }

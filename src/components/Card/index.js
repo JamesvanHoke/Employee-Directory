@@ -9,8 +9,7 @@ export default function Card(props) {
             alt={props.firstName}
           />
         </td>
-        <th>{props.firstName}</th>
-        <td>{props.lastName}</td>
+        <td>{props.firstName + " " +props.lastName}</td>
         <td>{props.email}</td>
         <td>{props.phone}</td>
         <td>{props.date}</td>
