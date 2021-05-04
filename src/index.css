@@ -11,3 +11,12 @@ div[data-reactroot] {
   padding: 0;
   margin: 0;
 }
+
+body {
+  padding-top: 60px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
