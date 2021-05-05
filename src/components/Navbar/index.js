@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <>
       <nav class="navbar fixed-top navbar-dark bg-dark justify-content-between">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">Employee Directory</span>
         <form class="form-inline">
           <input
             class="form-control mr-sm-2"
