@@ -8,6 +8,7 @@ class App extends Component {
     employees: [],
     userSearch: "",
     filteredEmployees: [],
+    sort: false,
   };
 
   // When component loads onto the page we query our user api
@@ -18,12 +19,24 @@ class App extends Component {
   // sets our employee state to the api response
   getEmployees = async () => {
     const { data } = await API.getUsers();
-    this.setState({ employees: data.results });
+    this.setState({ ...this.state, employees: data.results });
   };
 
   //Whenever our search form changes we set our userSearch state to it's value
   handleInputChange = (e) => {
     this.setState({ ...this.state, userSearch: e.target.value });
+  };
+
+  handleNameSort = () => {
+    if (this.state.sort === false) {
+      const sorted = this.state.employees.sort((a, b) =>
+        a.name.first.localeCompare(b.name.first)
+      );
+      this.setState({ ...this.state, employees: sorted, sort: true });
+    } else {
+      const revSorted = this.state.employees.reverse()
+      this.setState({...this.state, employees: revSorted, sort: false})
+    }
   };
 
   // when the search for changes we check if the new value is the same as it was previously. if it isn't we filter our employees by name and pass it into a new array in our state
@@ -36,7 +49,7 @@ class App extends Component {
           employee.name.last.toLowerCase().includes(searchParam)
         );
       });
-      this.setState({ ...this.setState, filteredEmployees: filtered });
+      this.setState({ ...this.state, filteredEmployees: filtered });
     }
   }
 
