@@ -1,13 +1,13 @@
 import CardHead from "../CardHead";
 import Card from "../Card";
 
-export default function CardWrapper({ employees }) {
+export default function CardWrapper(props) {
   return (
     <>
       <table className="table table-striped">
-        <CardHead />
+        <CardHead handleNameSort={props.handleNameSort} sort={props.sort} />
         <tbody>
-          {employees.map(({ picture, name, phone, email, dob, id }) => {
+          {props.employees.map(({ picture, name, phone, email, dob, id }) => {
             return (
               <Card
                 key={id.value}
