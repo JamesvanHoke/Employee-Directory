@@ -8,7 +8,7 @@ class App extends Component {
     employees: [],
     userSearch: "",
     filteredEmployees: [],
-    sort: false,
+    sort: "Ascending",
   };
 
   // When component loads onto the page we query our user api
@@ -28,14 +28,14 @@ class App extends Component {
   };
 
   handleNameSort = () => {
-    if (this.state.sort === false) {
+    if (this.state.sort === "Descending") {
       const sorted = this.state.employees.sort((a, b) =>
         a.name.first.localeCompare(b.name.first)
       );
-      this.setState({ ...this.state, employees: sorted, sort: true });
+      this.setState({ ...this.state, employees: sorted, sort: "Ascending" });
     } else {
-      const revSorted = this.state.employees.reverse()
-      this.setState({...this.state, employees: revSorted, sort: false})
+      const revSorted = this.state.employees.reverse();
+      this.setState({ ...this.state, employees: revSorted, sort: "Descending" });
     }
   };
 
@@ -60,6 +60,8 @@ class App extends Component {
       <div>
         <Navbar handleInputChange={this.handleInputChange} />
         <CardWrapper
+          handleNameSort={this.handleNameSort}
+          sort={this.state.sort}
           employees={
             isFiltered ? this.state.filteredEmployees : this.state.employees
           }
